@@ -12,8 +12,7 @@ public class Carotte extends Vegetal implements IRacePure {
 
 	@Override
 	public void seReproduire(HashMap<String, Integer> panier) {
-		int nombreDeGrainesActuelles = panier.get("Carotte");
-		panier.put("Carotte", nombreDeGrainesActuelles + 3);
+		panier.put("Carotte", panier.get("Carotte") + 3);
 	}
 
 

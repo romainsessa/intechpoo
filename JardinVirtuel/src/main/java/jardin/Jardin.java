@@ -21,6 +21,10 @@ public class Jardin {
 	private int largeur;
 	private HashMap<String, Integer> panier;
 	private Emplacement emplacement[][];
+	
+	public HashMap<String, Integer> getPanier() {
+		return panier;
+	}
 
 	public Jardin(int longueur, int largeur) {
 		this.longueur = longueur;
