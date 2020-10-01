@@ -144,7 +144,7 @@ public class Jardin {
 					} else if (veg instanceof IOgm) {
 						IOgm v = (IOgm) veg;
 						SimpleEntry<Integer, Integer> simpleEntry = v.seDupliquer(this.longueur, this.largeur);
-						emplacement[simpleEntry.getKey()][simpleEntry.getValue()] = new Emplacement(veg);
+						emplacement[simpleEntry.getValue()][simpleEntry.getKey()] = new Emplacement(veg);
 					}
 					emplacement[x][y] = null;
 				}
