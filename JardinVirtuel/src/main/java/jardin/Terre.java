@@ -6,7 +6,7 @@ public class Terre {
 
 	public static void main(String[] args) {
 		
-		Jardin j = new Jardin(3, 51);
+		Jardin j = new Jardin(3, 5);
 		j.ajouterPanier("Tomate", 5);
 		j.ajouterPanier("Betterave", 3);
 		j.ajouterPanier("Carotte", 4);
