@@ -27,11 +27,18 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class JardinController implements Initializable {
 
-	/** Model object **/
-	private HashMap<String, Integer> panier;
+	/** Pour injection automatique du controller, le nom de l'attribut doit être :
+	 *  valeur du fx:id de l'include (jardin.fxml ligne 94) + le mot Controller
+	 *  donc [panierPane][Controller] -> panierPaneController
+	 *  **/
+	@FXML
+	private PanierController panierPaneController;
+	
+	/** Model object **/	
 	private Emplacement[][] emplacements;
 	private int longueur = 5;
 	private int largeur = 5;
@@ -45,17 +52,11 @@ public class JardinController implements Initializable {
 	private TextField yField;
 	@FXML
 	private GridPane gridPane;
-	@FXML
-	private Label ailLabel;
-	@FXML
-	private Label carotteLabel;
-	@FXML
-	private Label betteraveLabel;
-	@FXML
-	private Label tomateLabel;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		ObservableList<String> list = FXCollections.observableArrayList("Ail", "Betterave", "Carotte", "Tomate"); // Model
 																													// init
 		vegetalChoice.setItems(list); // View init
@@ -69,13 +70,7 @@ public class JardinController implements Initializable {
 			}
 		}
 
-		panier = new HashMap<String, Integer>(); // Model init
-		panier.put("Ail", 5);
-		panier.put("Betterave", 5);
-		panier.put("Carotte", 5);
-		panier.put("Tomate", 5);
-
-		updatePanier(); // View init
+		panierPaneController.updatePanier(); // View init
 	}
 
 	@FXML
@@ -125,8 +120,8 @@ public class JardinController implements Initializable {
 					Vegetal veg = e.getVeg();
 					if (veg instanceof IRacePure) {
 						IRacePure v = (IRacePure) veg;
-						v.seReproduire(this.panier); // Model update
-						updatePanier(); // View update
+						v.seReproduire(panierPaneController.getPanier()); // Model update
+						panierPaneController.updatePanier(); // View update
 						emplacements[x][y] = null; // Model update
 						initCell(x, y); // View update
 					} else if (veg instanceof IOgm) {
@@ -163,13 +158,6 @@ public class JardinController implements Initializable {
 
 	}
 
-	private void updatePanier() {
-		ailLabel.setText(panier.get("Ail") + " graines d'Ail.");
-		betteraveLabel.setText(panier.get("Betterave") + " graines de Betteraves.");
-		carotteLabel.setText(panier.get("Carotte") + " graines de Carottes.");
-		tomateLabel.setText(panier.get("Tomate") + " graines de Tomates.");
-	}
-
 	private void updateCell(String txt, int x, int y) {
 		Label l = (Label) gridPane.getChildren().get(x * longueur + y);
 		l.setText(txt);
@@ -182,8 +170,9 @@ public class JardinController implements Initializable {
 	private void sow(Vegetal veg, int x, int y) {
 		emplacements[x][y] = new Emplacement(veg); // Model update
 		updateCell(veg.toString(), x, y); // View update
-		panier.put(veg.name(), panier.get(veg.name()) - 1); // Model update
-		updatePanier(); // View update
+		
+		panierPaneController.removeSeed(veg.name()); // Model update
+		panierPaneController.updatePanier(); // View update
 	}
 
 }

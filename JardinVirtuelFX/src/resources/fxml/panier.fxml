@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER"
+	spacing="10.0" styleClass="contenant"
+	fx:controller="com.intech.jardinfx.controller.PanierController">
+	<children>
+		<Label alignment="CENTER" contentDisplay="CENTER"
+			styleClass="subtitle" text="Panier" />
+		<Label fx:id="ailLabel" alignment="CENTER"
+			contentDisplay="CENTER" text="Ail" />
+		<Label fx:id="betteraveLabel" alignment="CENTER"
+			contentDisplay="CENTER" text="Betterave" />
+		<Label fx:id="carotteLabel" alignment="CENTER"
+			contentDisplay="CENTER" text="Carotte" />
+		<Label fx:id="tomateLabel" alignment="CENTER"
+			contentDisplay="CENTER" text="Tomate" />
+	</children>
+	<padding>
+		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+	</padding>
+	<HBox.margin>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</HBox.margin>
+</VBox>
+
